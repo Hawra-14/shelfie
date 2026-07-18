@@ -25,21 +25,26 @@ const bookSchema = new mongoose.Schema({
     },
     status: {
         type:String, // want to read, currently reading, read, and DNF
+        required: true,
     }, 
     ownershipStatus: {
         type: String,
+        required: true,
     },
     rate: {
         type: Number // 1-5 stars
     }, 
     review: {
         type: String, // rating message
+        maxlength: 200,
     },
     isBorrowable: {
         type: Boolean,
+        default: false,
     },
     isBorrowed: {
         type: Boolean,
+        default: false,
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

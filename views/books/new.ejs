@@ -1,0 +1,40 @@
+<%- include('../partials/nav') %>
+
+    <h1>Add a book</h1>
+
+    <form action="/books" method="POST">
+        Title: 
+        <input type="text" name="title">
+
+        Author: 
+        <input type="text" name="author">
+
+        Description:
+        <input type="text" name="description">
+
+        Image: 
+        <input type="file" name="image">
+        
+        Status: 
+        <input type="text" name="status">
+
+        Ownership Status:
+        <select name="ownershipStatus">
+            <option value="Owned">Owned</option>
+            <option value="Want to Buy">Want to Buy</option>
+        </select>
+        
+        Rate: 
+        <input type="number" name="rate">
+        
+        Review: 
+        <textarea name="review" maxlength="200"></textarea>
+
+        Is Borrowable? 
+        <input type="checkbox" name="isBorrowable">
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
