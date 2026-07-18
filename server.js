@@ -1,6 +1,7 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const dotenv = require("dotenv"); dotenv.config();
 const express = require("express");
+const path = require('path')
+
 const app = express();
 
 const mongoose = require("mongoose");
@@ -18,7 +19,7 @@ const port = process.env.PORT ? process.env.PORT : "3000";
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
+  console.log(`Connected to MongoDB ${mongoose.connection.name}.📚`);
 });
 
 // Middleware to parse URL-encoded data from forms
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, "public")))
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -42,7 +44,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/auth/home', authCtrl.home)
+
 app.get('/auth/sign-up', authCtrl.showSignUpForm )
 app.post('/auth/sign-up', authCtrl.signUp)
 app.get('/auth/sign-in', authCtrl.showSignInForm)
