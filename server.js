@@ -10,7 +10,13 @@ const morgan = require("morgan");
 const session = require('express-session')
 const { MongoStore } = require('connect-mongo')
 
+
+const isSignedIn = require('./middleware/is-signed-in')
+const passUserToView = require('./middleware/pass-user-to-view')
+
 const authCtrl = require('./controllers/auth')
+const bookCtrl = require('./controllers/books')
+
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
@@ -37,6 +43,8 @@ app.use(session({
         mongoUrl: process.env.MONGODB_URI
     }),
 }))
+app.use(passUserToView)
+
 
 app.get('/', (req, res) => {
     res.render('home.ejs', {
@@ -44,12 +52,20 @@ app.get('/', (req, res) => {
     })
 })
 
-
+// AUTH ROUTES
 app.get('/auth/sign-up', authCtrl.showSignUpForm )
 app.post('/auth/sign-up', authCtrl.signUp)
 app.get('/auth/sign-in', authCtrl.showSignInForm)
 app.post('/auth/sign-in', authCtrl.signIn)
 app.delete('/auth/sign-out', authCtrl.signOut)
+
+
+// BOOK ROUTES
+app.get('/books', bookCtrl.index)
+app.get('/books/new', isSignedIn, bookCtrl.showNewForm)
+app.post('/books', isSignedIn, bookCtrl.create)
+
+
 
 app.get('/dashboard', async (req, res) => {
     if (!req.session.user){

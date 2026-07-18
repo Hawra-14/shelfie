@@ -1,5 +1,6 @@
 body {
     background-color: rgb(209, 209, 189);
+    justify-items: center;
 }
 
 form {

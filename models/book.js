@@ -12,17 +12,34 @@ const bookSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    image: {
+        url: {
+            type: String,
+            required: true,
+            default: 'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg',
+        },
+        publicId: {
+            type: String,
+            required: true,
+        },
+    },
     status: {
         type:String, // want to read, currently reading, read, and DNF
     }, 
     ownershipStatus: {
-        type: Array,
+        type: String,
     },
     rate: {
         type: Number // 1-5 stars
     }, 
     review: {
         type: String, // rating message
+    },
+    isBorrowable: {
+        type: Boolean,
+    },
+    isBorrowed: {
+        type: Boolean,
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
