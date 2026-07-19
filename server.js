@@ -68,6 +68,7 @@ app.post('/books', isSignedIn, bookCtrl.create)
 app.get('/books/:bookId', bookCtrl.show)
 
 app.get('/to-borrow', toBorrowCtrl.index)
+app.get('/to-borrow/:bookId', toBorrowCtrl.show)
 
 
 

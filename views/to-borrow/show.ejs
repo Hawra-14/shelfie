@@ -1,0 +1,26 @@
+<%- include('../partials/nav') %>
+
+
+        <img src="../<%= foundBorrow.image %>" width="300">
+        <h1><%= foundBorrow.title %></h1>
+        <h2><%= foundBorrow.author %></h2>
+        <p>Owned by <%= foundBorrow.owner.username %></p>
+        
+        <div>
+            <% foundBorrow.genres.forEach((item) => { %>
+                <%= item %>
+            <% }) %>
+        </div>
+        <p><%= foundBorrow.description %></p>
+
+        <p>⭐<%= foundBorrow.rate %> by <%= foundBorrow.owner.username %></p>
+        <p><%= foundBorrow.review %></p>
+
+        <p>X people have borrowed this book</p>
+        <div>
+            <button>Borrow this Book</button>
+            <button>❤️Wish to Borrow?</button>
+        </div>
+
+</body>
+</html>

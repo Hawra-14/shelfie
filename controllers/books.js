@@ -53,6 +53,7 @@ const show = async (req, res) => {
 
   res.render('books/show.ejs', {
     foundBook,
+    foundBorrow,
   })
 }
 

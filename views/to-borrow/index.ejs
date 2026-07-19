@@ -10,7 +10,7 @@
     <% } else { %>
         <% allToBorrows.forEach((item) => { %>
             <div class="book-cards">
-                <a href="/allToBorrows/<%= item._id %>">
+                <a href="/to-borrow/<%= item._id %>">
                     <img src="<%= item.image %>" width="300">
                     <h4><%= item.title %></h4>
                     <p><%= item.author %></p>
