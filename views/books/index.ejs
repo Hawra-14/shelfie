@@ -1,21 +1,29 @@
 <%- include('../partials/nav') %>
 
 
-    <h1>All Books</h1>
+    <h1>My Books</h1>
 
     <a href="/books/new">Add a Book</a>
-    
+
+    <% let noBooks = false %>
     <% allBooks.forEach((item) => { %>
-        <div class="book-cards">
-            <a href="/books/<%= item._id %>">
-                <img src="<%= item.image %>" width="300">
-                <p><%= item.title %></p>
-                <p><%= item.author %></p>
-                <p><%= item.status %></p>
-            </a>
-        </div>
-        <br>
+        <% if (item.owner._id.equals(user._id)) { %>
+            <div class="book-cards">
+                <a href="/books/<%= item._id %>">
+                    <img src="<%= item.image %>" width="300">
+                    <p><%= item.title %></p>
+                    <p><%= item.author %></p>
+                    <p><%= item.status %></p>
+                </a>
+            </div>
+            <br>
+        <% } else { %>
+            <% noBooks = true %>
+        <% } %>
     <% }) %>
+    <% if (noBooks) {  %>
+        <p>You don't have books.</p>
+    <% } %>
 
 </body>
 </html>
