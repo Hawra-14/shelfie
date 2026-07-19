@@ -12,16 +12,22 @@ const bookSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    genres: {
+        type: Array,
+        // enum: [],
+    },
     image: {
-        url: {
-            type: String,
-            required: true,
-            default: 'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg',
-        },
-        publicId: {
-            type: String,
-            required: true,
-        },
+        type: String,
+        default: 'images/book-cover.jpg',
+        // url: {
+        //     type: String,
+        //     required: true,
+        //     default: 'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg',
+        // },
+        // publicId: {
+        //     type: String,
+        //     required: true,
+        // },
     },
     status: {
         type:String, // want to read, currently reading, read, and DNF
@@ -32,7 +38,9 @@ const bookSchema = new mongoose.Schema({
         required: true,
     },
     rate: {
-        type: Number // 1-5 stars
+        type: Number, // 1-5 stars
+        min: 1,
+        max: 5,
     }, 
     review: {
         type: String, // rating message
