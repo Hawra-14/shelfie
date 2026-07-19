@@ -49,7 +49,7 @@ const create = async (req, res) => {
 const show = async (req, res) => {
   const foundBook = await Book.findById(req.params.bookId).populate('owner')
   const foundBorrow = await Borrow.findById(req.params.bookId)
-console.log(foundBorrow, "foundBorrow");
+  console.log(foundBorrow, "foundBorrow");
 
   res.render('books/show.ejs', {
     foundBook,

@@ -16,6 +16,7 @@ const passUserToView = require('./middleware/pass-user-to-view')
 
 const authCtrl = require('./controllers/auth')
 const bookCtrl = require('./controllers/books')
+const toBorrowCtrl = require('./controllers/borrow')
 
 
 // Set the port from environment variable or default to 3000
@@ -65,6 +66,8 @@ app.get('/books', bookCtrl.index)
 app.get('/books/new', isSignedIn, bookCtrl.showNewForm)
 app.post('/books', isSignedIn, bookCtrl.create)
 app.get('/books/:bookId', bookCtrl.show)
+
+app.get('/to-borrow', toBorrowCtrl.index)
 
 
 
