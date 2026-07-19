@@ -64,6 +64,7 @@ app.delete('/auth/sign-out', authCtrl.signOut)
 app.get('/books', bookCtrl.index)
 app.get('/books/new', isSignedIn, bookCtrl.showNewForm)
 app.post('/books', isSignedIn, bookCtrl.create)
+app.get('/books/:bookId', bookCtrl.show)
 
 
 

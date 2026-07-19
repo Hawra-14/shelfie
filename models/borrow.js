@@ -19,7 +19,7 @@ const borrowSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-})
+}, { timestamps: true })
 
 const Borrow = mongoose.model('Borrow', borrowSchema)
 

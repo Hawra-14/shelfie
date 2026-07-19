@@ -1,0 +1,42 @@
+<%- include('../partials/nav') %>
+
+    <h1><%= foundBook.title %></h1>
+    <h2><%= foundBook.author %></h2>
+    <img src="../<%= foundBook.image %>" width="300">
+    <p><%= foundBook.status %></p>
+
+    <h3>Rating & Review</h3>
+    <%= foundBook.rate %>
+    <%= foundBook.review %>
+
+
+    <h3>Genres</h3>
+    <% foundBook.genres.forEach((item) => { %>
+        <%=item %>
+                <%console.log(foundBook, "foundbook") %>
+
+    <% }) %>
+
+    <% if (foundBook.owner._id.equals(user._id)) { %>
+        <!-- <p>YOU own this!</p> -->
+        <h3>Manage</h3>
+        <div>
+            <a href="/books/<%= foundBook._id %>/edit">Edit this Book</a>
+
+            <form action="/books/<%= foundBook._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete this Book</button>
+            </form>
+
+            <button>Add To Borrow</button>
+        </div>
+    <% } else { %>
+        <p>owned by <%= foundlisting.owner.username %></p>
+    <% } %>
+
+    <h3>Borrowed By</h3>
+    <% if (foundBook.isBorrowed) { %>
+
+    <% } %>
+
+</body>
+</html>

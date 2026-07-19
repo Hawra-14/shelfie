@@ -3,5 +3,19 @@
 
     <h1>All Books</h1>
 
+    <a href="/books/new">Add a Book</a>
+    
+    <% allBooks.forEach((item) => { %>
+        <div class="book-cards">
+            <a href="/books/<%= item._id %>">
+                <img src="<%= item.image %>" width="300">
+                <p><%= item.title %></p>
+                <p><%= item.author %></p>
+                <p><%= item.status %></p>
+            </a>
+        </div>
+        <br>
+    <% }) %>
+
 </body>
 </html>
