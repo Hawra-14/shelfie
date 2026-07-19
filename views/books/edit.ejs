@@ -1,0 +1,69 @@
+<%- include('../partials/nav') %>
+
+    <h1>Edit a book</h1>
+
+    <form action="/books/<%= foundBook._id %>?_method=PUT" method="POST">
+        Title: 
+        <input type="text" name="title" value="<%= foundBook.title %>">
+
+        Author: 
+        <input type="text" name="author" value="<%= foundBook.author %>">
+
+        Description:
+        <textarea name="description"><%= foundBook.description %></textarea>
+
+        Image: 
+        <input type="text" name="image" value="<%= foundBook.image %>">
+        
+        Status: 
+        <select name="status">
+            <option value="Want to Read" <%= foundBook.status === 'Want to Read' ? 'selected' : '' %>>Want to Read</option>
+            <option value="Currently Reading" <%= foundBook.status === 'Currently Reading' ? 'selected' : '' %>>Currently Reading</option>
+            <option value="Read" <%= foundBook.status === 'Read' ? 'selected' : '' %>>Read</option>
+            <option value="DNF" <%= foundBook.status === 'DNF' ? 'selected' : '' %>>DNF</option>
+        </select>
+
+        Ownership Status:
+        <select name="ownershipStatus" value="<%= foundBook.ownershipStatus %>">
+            <option value="Owned" <%= foundBook.ownershipStatus === 'Owned'? 'selected' : '' %>>Owned</option>
+            <option value="Want to Buy" <%= foundBook.ownershipStatus === 'Want to Buy'? 'selected' : '' %>>Want to Buy</option>
+        </select>
+        
+        Rate: 
+        <input type="number" name="rate" value="<%= foundBook.rate %>" min="1" max="5">
+        
+        Review: 
+        <textarea name="review" maxlength="200"><%= foundBook.review %></textarea>
+
+        Genres:
+        <select name="genres" multiple>
+            <option value="Fiction" <%= foundBook.genres.includes('Fiction') ? 'selected' : '' %>>Fiction</option>
+            <option value="Nonfiction" <%= foundBook.genres.includes('Nonfiction') ? 'selected' : '' %>>Nonfiction</option>
+            <option value="Memoir" <%= foundBook.genres.includes('Memoir') ? 'selected' : '' %>>Memoir</option>
+            <option value="Biography" <%= foundBook.genres.includes('Biography') ? 'selected' : '' %>>Biography</option>
+            <option value="Fantasy" <%= foundBook.genres.includes('Fantasy') ? 'selected' : '' %>>Fantasy</option>
+            <option value="Science Fiction" <%= foundBook.genres.includes('Science Fiction') ? 'selected' : '' %>>Science Fiction</option>
+            <option value="Mystery" <%= foundBook.genres.includes('Mystery') ? 'selected' : '' %>>Mystery</option>
+            <option value="Thriller" <%= foundBook.genres.includes('Thriller') ? 'selected' : '' %>>Thriller</option>
+            <option value="Romance" <%= foundBook.genres.includes('Romance') ? 'selected' : '' %>>Romance</option>
+            <option value="Historical Fiction" <%= foundBook.genres.includes('Historical Fiction') ? 'selected' : '' %>>Historical Fiction</option>
+            <option value="Self-Help" <%= foundBook.genres.includes('Self-Help') ? 'selected' : '' %>>Self-Help</option>
+            <option value="Poetry" <%= foundBook.genres.includes('Poetry') ? 'selected' : '' %>>Poetry</option>
+            <option value="Young Adult" <%= foundBook.genres.includes('Young Adult') ? 'selected' : '' %>>Young Adult</option>
+            <option value="Children's" <%= foundBook.genres.includes("Children's") ? 'selected' : '' %>>Children's</option>
+            <option value="Horror" <%= foundBook.genres.includes('Horror') ? 'selected' : '' %>>Horror</option>
+            <option value="Classics" <%= foundBook.genres.includes('Classics') ? 'selected' : '' %>>Classics</option>
+        </select>
+
+        Is Borrowable? 
+        <% if (foundBook.isBorrowable) { %>
+            <input type="checkbox" name="isBorrowable" checked/>
+        <% } else { %>
+            <input type="checkbox" name="isBorrowable" />
+        <% } %>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

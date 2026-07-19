@@ -9,14 +9,14 @@
         <p><%= foundBook.status %></p>
 
         <h3>Rating & Review</h3>
-        <%= foundBook.rate %>
-        <%= foundBook.review %>
+        <p>⭐<%= foundBook.rate %></p>
+        <p><%= foundBook.review %></p>
 
 
         <h3>Genres</h3>
         <% foundBook.genres.forEach((item) => { %>
             <%=item %>
-                    <%console.log(foundBook, "foundbook") %>
+            <%console.log(foundBook, "foundbook") %>
 
         <% }) %>
         <h3>Manage</h3>

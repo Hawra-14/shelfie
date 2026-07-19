@@ -66,6 +66,9 @@ app.get('/books', bookCtrl.index)
 app.get('/books/new', isSignedIn, bookCtrl.showNewForm)
 app.post('/books', isSignedIn, bookCtrl.create)
 app.get('/books/:bookId', bookCtrl.show)
+app.get('/books/:bookId/edit', bookCtrl.edit)
+app.put('/books/:bookId', isSignedIn, bookCtrl.update)
+
 
 app.get('/to-borrow', toBorrowCtrl.index)
 app.get('/to-borrow/:bookId', toBorrowCtrl.show)
