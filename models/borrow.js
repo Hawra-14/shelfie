@@ -11,13 +11,15 @@ const borrowSchema = new mongoose.Schema({
         ref: 'Book',
         required: true,
     },
+    status: {
+        type: String, // pending, rejected, borrowed, returned
+        default: 'pending'
+    },
     borrowDate: {
         type: Date,
-        required: true,
     },
     returnDate: {
         type: Date,
-        required: true,
     },
 }, { timestamps: true })
 
