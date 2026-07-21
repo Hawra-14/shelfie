@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const borrowSchema = new mongoose.Schema({
+    // add the book owner ID
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -11,9 +12,18 @@ const borrowSchema = new mongoose.Schema({
         ref: 'Book',
         required: true,
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Book',
+        required: true,
+    },
     status: {
         type: String, // pending, rejected, borrowed, returned
         default: 'pending'
+    },
+    requestDate: {
+        type: Date,
+        required: true,
     },
     borrowDate: {
         type: Date,
