@@ -1,7 +1,7 @@
 <%- include('../partials/nav') %>
 
 
-        <img src="../<%= foundBorrow.image %>" width="300">
+        <img src="<%= foundBorrow.image %>" width="300">
         <h1><%= foundBorrow.title %></h1>
         <h2><%= foundBorrow.author %></h2>
         <p>Owned by <%= foundBorrow.owner.username %></p>
@@ -16,19 +16,25 @@
         <p>⭐<%= foundBorrow.rate %> by <%= foundBorrow.owner.username %></p>
         <p><%= foundBorrow.review %></p>
 
-        <p>X people have borrowed this book</p>
+        <!-- <p>X people have borrowed this book</p> -->
         <div>
-            <% if (!foundBorrow.isBorrowed) { %>
+            <% if (userBorrow && userBorrow.status === 'pending') { %>
+                <button disabled>Request Pending</button>
+            <% } else if (userBorrow && userBorrow.status === 'borrowed') { %>
+                <form action="/to-borrow/<%= foundBorrow._id %>/return" method="POST">
+                    <button type="submit">Return this Book</button>
+                </form>
+            <% } else if (foundBorrow.isBorrowed) { %>
+                <p>This book is already borrowed by <%= userBorrow.userId.username %></p>
+            <% } else { %>
                 <form action="/to-borrow/<%= foundBorrow._id %>" method="POST">
                     <button type="submit">Borrow this Book</button>
                 </form>
-            <% } else { %>
-                <p>This book is already borrowed</p>
             <% } %>
 
-            <form action="">
+            <!-- <form action="">
                 <button>❤️Wish to Borrow?</button>
-            </form>
+            </form> -->
         </div>
 
 </body>
