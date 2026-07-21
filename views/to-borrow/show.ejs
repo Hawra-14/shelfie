@@ -18,8 +18,17 @@
 
         <p>X people have borrowed this book</p>
         <div>
-            <button>Borrow this Book</button>
-            <button>❤️Wish to Borrow?</button>
+            <% if (!foundBorrow.isBorrowed) { %>
+                <form action="/to-borrow/<%= foundBorrow._id %>" method="POST">
+                    <button type="submit">Borrow this Book</button>
+                </form>
+            <% } else { %>
+                <p>This book is already borrowed</p>
+            <% } %>
+
+            <form action="">
+                <button>❤️Wish to Borrow?</button>
+            </form>
         </div>
 
 </body>
