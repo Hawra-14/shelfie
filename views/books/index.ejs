@@ -1,13 +1,13 @@
 <%- include('../partials/nav') %>
 
-
     <h1>My Books</h1>
 
     <a href="/books/new">Add a Book</a>
 
-    <% let noBooks = false %>
-    <% allBooks.forEach((item) => { %>
-        <% if (item.owner._id.equals(user._id)) { %>
+    <% if (myBooks.length === 0) { %>
+        <p>You don't have books.</p>
+    <% } else { %>
+        <% myBooks.forEach((item) => { %>
             <div class="book-cards">
                 <a href="/books/<%= item._id %>">
                     <img src="<%= item.image %>" width="300">
@@ -17,12 +17,7 @@
                 </a>
             </div>
             <br>
-        <% } else { %>
-            <% noBooks = true %>
-        <% } %>
-    <% }) %>
-    <% if (noBooks) {  %>
-        <p>You don't have books.</p>
+        <% }) %>
     <% } %>
 
 </body>
