@@ -27,7 +27,7 @@ const signUp = async (req, res) => {
         _id: user._id
     }
     req.session.save(() => {
-        res.redirect('/')
+        res.redirect('/books')
     })
 }
 
@@ -55,13 +55,13 @@ const signIn = async (req, res) => {
         _id: userInDatabase._id
     }
     req.session.save(() => {
-        res.redirect('/')
+        res.redirect('/books')
     })
 }
 
 const signOut = async (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/')
+        res.redirect('/books')
     })
 }
 
