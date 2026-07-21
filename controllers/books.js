@@ -47,7 +47,7 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   const foundBook = await Book.findById(req.params.bookId).populate('owner')
-  const foundBorrow = await Borrow.findById(req.params.bookId)
+  const foundBorrow = await Borrow.find({ bookId: req.params.bookId }).populate('userId')
   console.log(foundBorrow, "foundBorrow");
 
   res.render('books/show.ejs', {
@@ -107,6 +107,16 @@ const deleteBook = async (req, res) => {
   }
 }
 
+const showMyBorrows = async (req, res) => {
+  // find all books that belong to me AND have a borrow status of pending
+  const borrowRequest = await Borrow.find({ owner: req.session.user._id, status: 'pending' }).populate('userId')
+  console.log(borrowRequest)
+  res.render('dashboard.ejs', {
+    user: req.session.user,
+    borrowRequest,
+  })
+}
+
 module.exports = {
   index,
   showNewForm,
@@ -115,4 +125,5 @@ module.exports = {
   edit,
   update,
   deleteBook,
+  showMyBorrows,
 }
