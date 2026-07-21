@@ -70,16 +70,18 @@ app.get('/books/:bookId/edit', bookCtrl.edit)
 app.put('/books/:bookId', isSignedIn, bookCtrl.update)
 app.delete('/books/:bookId', isSignedIn, bookCtrl.deleteBook)
 
-
+// TO BORROW ROUTES
 app.get('/to-borrow', toBorrowCtrl.index)
 app.get('/to-borrow/:bookId', toBorrowCtrl.show)
-// app.get('to-borrow/:borrowId', toBorrowCtrl.borrow)
 app.post('/to-borrow/:borrowId', isSignedIn, toBorrowCtrl.borrow)
+app.post('/to-borrow/:bookId/return', isSignedIn, toBorrowCtrl.returnBook)
 
-
-
+// DASHBOARD ROUTES
 app.get('/dashboard', isSignedIn, bookCtrl.showMyBorrows)
-app.put('/dashboard/:bookId', isSignedIn, bookCtrl.accept)
+app.put('/dashboard/:bookId/:borrowId', isSignedIn, bookCtrl.accept)
+
+// BORROWED ROUTES
+app.get('/borrowed', isSignedIn, toBorrowCtrl.borrowed)
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
