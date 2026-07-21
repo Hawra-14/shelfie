@@ -13,7 +13,9 @@
                     <img src="<%= item.image %>" width="300">
                     <p><%= item.title %></p>
                     <p><%= item.author %></p>
-                    <p><%= item.status %></p>
+                    <% if (item.status === 'borrowed') { %>
+                        <p>Borrowed</p>
+                    <% } %>
                 </a>
             </div>
             <br>
