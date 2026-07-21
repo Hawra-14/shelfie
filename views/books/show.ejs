@@ -25,11 +25,16 @@
                 <button type="submit">Delete this Book</button>
             </form>
 
-            <button>Add To Borrow</button>
+            <form action="" method="POST">
+                <button>Add To Borrow</button>
+            </form>
         </div>
 
         <h3>Borrowed By</h3>
         <% if (foundBook.isBorrowed) { %>
+          <%  foundBorrow.forEach((borrow)=>{%>
+            <p><%=borrow.userId.username%></p>
+         <% }) %>
 
         <% } %>
 
