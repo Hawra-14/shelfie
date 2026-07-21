@@ -16,7 +16,9 @@ const show = async (req, res) => {
   const userBorrow = await Borrow.findOne({
     bookId: req.params.bookId,
     userId: req.session.user._id,
-  }).populate('userId')
+  })
+  .sort({ createdAt: -1 }) // Graps the most recent request
+  .populate('userId')
 
   if (foundBorrow.owner.equals(req.session.user._id)) {
     return res.redirect('/books')
