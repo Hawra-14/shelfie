@@ -17,6 +17,7 @@ const showNewForm = async (req, res) => {
 const create = async (req, res) => {
   const bookData = {}
 
+  bookData.image = req.body.image
   bookData.title = req.body.title
   bookData.author = req.body.author
   bookData.description = req.body.description
@@ -47,8 +48,8 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   const foundBook = await Book.findById(req.params.bookId).populate('owner')
-  const foundBorrow = await Borrow.find({ bookId: req.params.bookId }).populate('userId')
-  console.log(foundBorrow, "foundBorrow");
+  const foundBorrow = await Borrow.find({ bookId: req.params.bookId }).populate('userId').populate('userId.username')
+  // console.log(foundBorrow, "foundBorrow");
 
   res.render('books/show.ejs', {
     foundBook,
@@ -67,6 +68,7 @@ const update = async (req, res) => {
   const foundBook = await Book.findByIdAndUpdate(req.params.bookId)
   const bookData = {}
 
+  bookData.image = req.body.image
   bookData.title = req.body.title
   bookData.author = req.body.author
   bookData.description = req.body.description
@@ -110,25 +112,23 @@ const deleteBook = async (req, res) => {
 const showMyBorrows = async (req, res) => {
   // find all books that belong to me AND have a borrow status of pending
   const borrowRequest = await Borrow.find({ owner: req.session.user._id, status: 'pending' }).populate('userId').populate('bookId')
-  console.log(borrowRequest)
+  // console.log(borrowRequest)
   res.render('dashboard.ejs', {
     user: req.session.user,
     borrowRequest,
   })
-  // .toDateString()
 }
 
 const accept = async (req, res) => {
-  const borrowBook = await Borrow.findByIdAndUpdate(req.params.bookId)
-  const borrowData = {}
+  const foundBorrow = await Borrow.findById(req.params.borrowId)
+  const foundBook = await Book.findById(req.params.bookId)
 
-  borrowData.userId = req.session.user._id
-  borrowData.bookId = req.params.bookId
-  borrowData.owner = borrowBook.owner
-  borrowData.status = 'accept'
+  foundBorrow.status = 'borrowed'
+  foundBook.isBorrowed = true
+  
+  await foundBorrow.save()
+  await foundBook.save()
 
-  await borrowBook.save()
-  await Borrow.findByIdAndUpdate(req.params.bookId, borrowData, { new: true })
   res.redirect('/dashboard')
 }
 

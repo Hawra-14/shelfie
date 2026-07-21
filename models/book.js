@@ -13,8 +13,7 @@ const bookSchema = new mongoose.Schema({
         type: String,
     },
     genres: {
-        type: Array,
-        // enum: [],
+        type: [String],
     },
     image: {
         type: String,
@@ -32,7 +31,7 @@ const bookSchema = new mongoose.Schema({
     status: {
         type: String, // want to read, currently reading, read, and DNF
         required: true,
-    }, 
+    },
     ownershipStatus: {
         type: String,
         required: true,
@@ -41,7 +40,7 @@ const bookSchema = new mongoose.Schema({
         type: Number, // 1-5 stars
         min: 1,
         max: 5,
-    }, 
+    },
     review: {
         type: String, // rating message
         maxlength: 200,
