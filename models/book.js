@@ -30,7 +30,7 @@ const bookSchema = new mongoose.Schema({
         // },
     },
     status: {
-        type:String, // want to read, currently reading, read, and DNF
+        type: String, // want to read, currently reading, read, and DNF
         required: true,
     }, 
     ownershipStatus: {

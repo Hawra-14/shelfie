@@ -3,11 +3,10 @@ const Book = require('../models/book.js')
 const Borrow = require('../models/borrow.js')
 
 const index = async (req, res) => {
-  let allBooks = await Book.find().populate('owner')
+  const myBooks = await Book.find({ owner: req.session.user._id }).populate('owner')
 
-  console.log(allBooks)
   res.render('books/index.ejs', {
-    allBooks,
+    myBooks,
   })
 }
 
@@ -61,8 +60,7 @@ const edit = async (req, res) => {
   const foundBook = await Book.findById(req.params.bookId)
   res.render('books/edit.ejs', {
     foundBook,
-  }
-  )
+  })
 }
 
 const update = async (req, res) => {
@@ -98,6 +96,17 @@ const update = async (req, res) => {
   res.redirect(`/books/${req.params.bookId}`)
 }
 
+const deleteBook = async (req, res) => {
+  const foundBook = await Book.findById(req.params.bookId)
+
+  if (foundBook.owner.equals(req.session.user._id)) {
+    await Book.findByIdAndDelete(req.params.bookId)
+    res.redirect('/books')
+  } else {
+    res.send("You can't delete this book")
+  }
+}
+
 module.exports = {
   index,
   showNewForm,
@@ -105,4 +114,5 @@ module.exports = {
   show,
   edit,
   update,
+  deleteBook,
 }
