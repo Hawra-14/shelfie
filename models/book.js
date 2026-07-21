@@ -18,7 +18,7 @@ const bookSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: 'images/book-cover.jpg',
+        default: 'https://images.pexels.com/photos/4033849/pexels-photo-4033849.jpeg',
         // url: {
         //     type: String,
         //     required: true,

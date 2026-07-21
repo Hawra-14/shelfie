@@ -109,12 +109,27 @@ const deleteBook = async (req, res) => {
 
 const showMyBorrows = async (req, res) => {
   // find all books that belong to me AND have a borrow status of pending
-  const borrowRequest = await Borrow.find({ owner: req.session.user._id, status: 'pending' }).populate('userId')
+  const borrowRequest = await Borrow.find({ owner: req.session.user._id, status: 'pending' }).populate('userId').populate('bookId')
   console.log(borrowRequest)
   res.render('dashboard.ejs', {
     user: req.session.user,
     borrowRequest,
   })
+  // .toDateString()
+}
+
+const accept = async (req, res) => {
+  const borrowBook = await Borrow.findByIdAndUpdate(req.params.bookId)
+  const borrowData = {}
+
+  borrowData.userId = req.session.user._id
+  borrowData.bookId = req.params.bookId
+  borrowData.owner = borrowBook.owner
+  borrowData.status = 'accept'
+
+  await borrowBook.save()
+  await Borrow.findByIdAndUpdate(req.params.bookId, borrowData, { new: true })
+  res.redirect('/dashboard')
 }
 
 module.exports = {
@@ -126,4 +141,5 @@ module.exports = {
   update,
   deleteBook,
   showMyBorrows,
+  accept,
 }

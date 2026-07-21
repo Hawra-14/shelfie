@@ -79,6 +79,7 @@ app.post('/to-borrow/:borrowId', isSignedIn, toBorrowCtrl.borrow)
 
 
 app.get('/dashboard', isSignedIn, bookCtrl.showMyBorrows)
+app.put('/dashboard/:bookId', isSignedIn, bookCtrl.accept)
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

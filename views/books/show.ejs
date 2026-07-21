@@ -4,7 +4,7 @@
     <% if (foundBook.owner._id.equals(user._id)) { %>
         <h1><%= foundBook.title %></h1>
         <h2><%= foundBook.author %></h2>
-        <img src="../<%= foundBook.image %>" width="300">
+        <img src="<%= foundBook.image %>" width="300">
         <p><%= foundBook.description %></p>
         <p><%= foundBook.status %></p>
 
