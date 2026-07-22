@@ -22,7 +22,7 @@
                             <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Accept</button>
                         </form>
 
-                        <form action="/dashboard?_method=PUT" method="POST">
+                        <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>/reject?_method=PUT" method="POST">
                             <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Reject</button>
                         </form>
                     </div>

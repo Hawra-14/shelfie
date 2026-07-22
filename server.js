@@ -19,7 +19,6 @@ const bookCtrl = require('./controllers/books')
 const toBorrowCtrl = require('./controllers/borrows')
 
 
-// Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
 
 
@@ -29,11 +28,8 @@ mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.📚`);
 });
 
-// Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
-// Middleware for using HTTP verbs such as PUT or DELETE
 app.use(methodOverride("_method"));
-// Morgan for logging HTTP requests
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, "public")))
 app.use(session({
@@ -66,7 +62,7 @@ app.get('/books', bookCtrl.index)
 app.get('/books/new', isSignedIn, bookCtrl.showNewForm)
 app.post('/books', isSignedIn, bookCtrl.create)
 app.get('/books/:bookId', bookCtrl.show)
-app.get('/books/:bookId/edit', bookCtrl.edit)
+app.get('/books/:bookId/edit', isSignedIn, bookCtrl.edit)
 app.put('/books/:bookId', isSignedIn, bookCtrl.update)
 app.delete('/books/:bookId', isSignedIn, bookCtrl.deleteBook)
 app.put('/books/:bookId/borrow-status', isSignedIn, bookCtrl.addToBorrow)
@@ -80,6 +76,7 @@ app.post('/to-borrow/:bookId/return', isSignedIn, toBorrowCtrl.returnBook)
 // DASHBOARD ROUTES
 app.get('/dashboard', isSignedIn, bookCtrl.showMyBorrows)
 app.put('/dashboard/:bookId/:borrowId', isSignedIn, bookCtrl.accept)
+app.put('/dashboard/:bookId/:borrowId/reject', isSignedIn, bookCtrl.reject)
 
 // BORROWED ROUTES
 app.get('/borrowed', isSignedIn, toBorrowCtrl.borrowed)

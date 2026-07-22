@@ -132,6 +132,14 @@ const accept = async (req, res) => {
   res.redirect('/dashboard')
 }
 
+const reject = async (req, res) => {
+  await Borrow.findByIdAndUpdate(req.params.borrowId, {
+    status: 'rejected',
+  })
+
+  res.redirect('/dashboard')
+}
+
 const addToBorrow = async (req, res) => {
   await Book.findByIdAndUpdate(req.params.bookId, { isBorrowable: true })
   res.redirect(`/books/${req.params.bookId}`)
@@ -147,5 +155,6 @@ module.exports = {
   deleteBook,
   showMyBorrows,
   accept,
+  reject,
   addToBorrow,
 }
