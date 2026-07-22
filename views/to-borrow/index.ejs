@@ -1,7 +1,7 @@
 <%- include('../partials/nav') %>
 
 
-    <h1>Books to Borrow</h1>
+    <h1 style="margin-top: 4rem;">Books to Borrow</h1>
 
     <% if (allToBorrows.length === 0) { %>
         <p>There are no books that are available to borrow.</p>
@@ -9,7 +9,7 @@
     <% } else { %>
         <div class="book-cards">
             <% allToBorrows.forEach((item) => { %>
-                <% if (!item.owner.equals(user._id)) { %>
+                <% if (!user || !item.owner.equals(user._id)) { %>
                     <a href="/to-borrow/<%= item._id %>" style="text-decoration: none; color: black;">
                         <div class="book-card">
                             <img src="<%= item.image %>" width="200">

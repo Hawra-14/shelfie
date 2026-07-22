@@ -6,21 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="shortcut icon" href="/images/book-shelf.png" type="image/x-icon">
 </head>
 
 <body>
     <nav>
-      Shelfie
+        <div class="logo">
+            <img src="../images/book-shelf.png" alt="" width="30">
+            <a href="/" style="font-size: 25px;">Shelfie</a>
+        </div>
         <% if (user) { %>
-            <a href="/books">My Shelf</a>
-            <a href="/to-borrow">to Borrow</a>
-            <a href="/borrowed">Borrowed</a>
-            <a href="/dashboard"><%= user.username %></a>
-            <form action="/auth/sign-out?_method=DELETE" method="POST">
-                <button type="submit">Sign Out</button>
-            </form>
+            <div class="nav-links">
+                <a href="/books">My Shelf</a>
+                <a href="/to-borrow">to Borrow</a>
+                <a href="/borrowed">Borrowed</a>
+                <a href="/dashboard">Dashboard</a>
+            </div>
+            <div class="signing">
+                <form action="/auth/sign-out?_method=DELETE" method="POST">
+                    <button type="submit">Sign Out</button>
+                </form>
+            </div>
         <% } else { %>
-            <a href="/auth/sign-in">Sign In</a>
-            <a href="/auth/sign-up">Sign Up</a>
+            <div class="signing">
+                <a href="/auth/sign-in">Sign In</a>
+                <a href="/auth/sign-up">Sign Up</a>
+            </div>
         <% } %>
     </nav>

@@ -12,15 +12,18 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   const foundBorrow = await Book.findById(req.params.bookId).populate('owner')
-  // const borrowed = await Borrow.find()
-  const userBorrow = await Borrow.findOne({
-    bookId: req.params.bookId,
-    userId: req.session.user._id,
-  })
-  .sort({ createdAt: -1 }) // Graps the most recent request
-  .populate('userId')
+  const user = req.session.user
 
-  if (foundBorrow.owner.equals(req.session.user._id)) {
+  const userBorrow = user
+    ? await Borrow.findOne({
+      bookId: req.params.bookId,
+      userId: user._id,
+    })
+      .sort({ createdAt: -1 })
+      .populate('userId')
+    : null
+
+  if (user && foundBorrow.owner.equals(user._id)) {
     return res.redirect('/books')
   }
 
@@ -32,17 +35,17 @@ const show = async (req, res) => {
 
 // on the borrowable show page, there should be a "form" --> just a button "Borrow"
 const borrow = async (req, res) => {
-let foundBook = await Book.findById(req.params.borrowId)
-// console.log(foundBook.owner)
+  let foundBook = await Book.findById(req.params.borrowId)
+  // console.log(foundBook.owner)
 
   const borrowData = {}
-  
+
   borrowData.userId = req.session.user._id
   borrowData.bookId = req.params.borrowId
   borrowData.owner = foundBook.owner
   borrowData.status = 'pending'
   borrowData.requestDate = new Date()
-  
+
   const createdBorrow = await Borrow.create(borrowData)
   res.redirect(`/to-borrow/${req.params.borrowId}`)
 }
