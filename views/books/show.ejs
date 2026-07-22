@@ -35,13 +35,6 @@
             <% } %>
         </div>
 
-        <h3>Borrowed By</h3>
-        <% if (foundBook.isBorrowed) { %>
-          <%  foundBorrow.forEach((borrow)=>{%>
-            <p><%=borrow.userId.username%></p>
-         <% }) %>
-        <% } %>
-
     <% } else { %>
         <p>You don't have books.</p>
     <% } %>
