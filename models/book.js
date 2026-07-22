@@ -18,15 +18,6 @@ const bookSchema = new mongoose.Schema({
     image: {
         type: String,
         default: 'https://images.pexels.com/photos/4033849/pexels-photo-4033849.jpeg',
-        // url: {
-        //     type: String,
-        //     required: true,
-        //     default: 'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg',
-        // },
-        // publicId: {
-        //     type: String,
-        //     required: true,
-        // },
     },
     status: {
         type: String, // want to read, currently reading, read, and DNF
@@ -42,7 +33,7 @@ const bookSchema = new mongoose.Schema({
         max: 5,
     },
     review: {
-        type: String, // rating message
+        type: String,
         maxlength: 400,
     },
     isBorrowable: {

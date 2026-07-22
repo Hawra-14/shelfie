@@ -4,7 +4,6 @@ const Book = require('../models/book.js')
 const index = async (req, res) => {
   let allToBorrows = await Book.find({ isBorrowable: true }).populate('owner')
 
-  // the index page it renders should display each book with a link to a show page
   res.render('to-borrow/index.ejs', {
     allToBorrows,
   })
@@ -32,10 +31,8 @@ const show = async (req, res) => {
   })
 }
 
-// on the borrowable show page, there should be a "form" --> just a button "Borrow"
 const borrow = async (req, res) => {
   let foundBook = await Book.findById(req.params.borrowId)
-  // console.log(foundBook.owner)
 
   const borrowData = {}
 
@@ -56,7 +53,7 @@ const returnBook = async (req, res) => {
   )
   await Book.findByIdAndUpdate(req.params.bookId, { isBorrowed: false })
 
-  if (req.get('Referer') && req.get('Referer').includes('/borrowed')) { // Reads the URL before the form was submitted 
+  if (req.get('Referer') && req.get('Referer').includes('/borrowed')) { 
     return res.redirect('/borrowed')
   }
 
@@ -66,7 +63,7 @@ const returnBook = async (req, res) => {
 const borrowed = async (req, res) => {
   const myBorrowed = await Borrow.find({
     userId: req.session.user._id,
-    status: { $in: ['borrowed', 'returned'] }, // match if the field's value is one of these options (OR)
+    status: { $in: ['borrowed', 'returned'] }, 
   }).populate('bookId').populate('owner')
 
   res.render('borrowed/index.ejs', {

@@ -33,12 +33,6 @@ const create = async (req, res) => {
     bookData.isBorrowable = false
   }
 
-  // if (req.body.isBorrowed === 'on') {
-  //   bookData.isBorrowed = true
-  // } else {
-  //   bookData.isBorrowed = false
-  // }
-
   bookData.owner = req.session.user._id
 
   let createdBook = await Book.create(bookData)
@@ -49,7 +43,6 @@ const create = async (req, res) => {
 const show = async (req, res) => {
   const foundBook = await Book.findById(req.params.bookId).populate('owner')
   const foundBorrow = await Borrow.find({ bookId: req.params.bookId }).populate('userId').populate('userId.username')
-  // console.log(foundBorrow, "foundBorrow");
 
   res.render('books/show.ejs', {
     foundBook,
@@ -84,12 +77,6 @@ const update = async (req, res) => {
     bookData.isBorrowable = false
   }
 
-  // if (req.body.isBorrowed === 'on') {
-  //   bookData.isBorrowed = true
-  // } else {
-  //   bookData.isBorrowed = false
-  // }
-
   bookData.owner = req.session.user._id
 
   await foundBook.save()
@@ -110,9 +97,7 @@ const deleteBook = async (req, res) => {
 }
 
 const showMyBorrows = async (req, res) => {
-  // find all books that belong to me AND have a borrow status of pending
   const borrowRequest = await Borrow.find({ owner: req.session.user._id, status: 'pending' }).populate('userId').populate('bookId')
-  // console.log(borrowRequest)
   res.render('dashboard.ejs', {
     user: req.session.user,
     borrowRequest,
