@@ -1,34 +1,30 @@
 <%- include('../partials/nav') %>
 
 
-    <h1 style="margin-top: 4rem;">Borrowed Books</h1>
+    <h1 style="margin-top: 4rem; margin-bottom: 3rem;">Borrowed Books</h1>
     <% console.log(myBorrowed) %>
 
     <% if (myBorrowed.length === 0) { %>
         <p>You haven't borrowed any books yet.</p>
     <% } else { %>
-        <% myBorrowed.forEach((item) => { %>
-            <div>
-                <img src="<%= item.bookId.image %>" alt="<%= item.bookId.title %>" width="300">
-                <h2><%= item.bookId.title %></h2>
-                <h3>Book By <%= item.bookId.author %></h3>
-                <p>Description: <%= item.bookId.description %></p>
-                <div>Genres: 
-                    <% item.bookId.genres.forEach((genre)=> { %>
-                        <button><%= genre %></button>
-                    <% }) %>
-                </div>
-                
-                <p>Owned By <%= item.owner.username %></p>
+        <div class="book-cards">
+            <% myBorrowed.forEach((item) => { %>
+                <div class="borrowed-card">
+                    <img src="<%= item.bookId.image %>" alt="<%= item.bookId.title %>" width="200">
+                    <div class="book-main-info">
+                        <h2><%= item.bookId.title %></h2>
+                        <p>Book By <%= item.bookId.author %></p>
+                        <p>Owned By <%= item.owner.username %></p>
 
-                <% if (item.status === 'borrowed') { %>
-                    <form action="/to-borrow/<%= item.bookId._id %>/return" method="POST">
-                        <button type="submit">Return this Book</button>
-                    </form>
-                <% } %>
-            </div>
-            <br>
-        <% }) %>
+                        <% if (item.status === 'borrowed') { %>
+                            <form action="/to-borrow/<%= item.bookId._id %>/return" method="POST">
+                                <button type="submit" class="return-btn">Return this Book</button>
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     <% } %>
 
 </body>

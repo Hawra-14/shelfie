@@ -43,7 +43,7 @@ const bookSchema = new mongoose.Schema({
     },
     review: {
         type: String, // rating message
-        maxlength: 200,
+        maxlength: 400,
     },
     isBorrowable: {
         type: Boolean,

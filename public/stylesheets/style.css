@@ -92,6 +92,7 @@ nav a {
     border-radius: 16px;
     width: 60%;
     justify-items: center;
+    margin-bottom: 20px;
 }
 
 .action-btn {
@@ -117,6 +118,7 @@ nav a {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 1200px;
 }
 
 .book-card {
@@ -124,7 +126,7 @@ nav a {
     background-color: rgba(218, 211, 211, 0.81);
     position: relative;
     max-width: 200px;
-    min-height: 400px;
+    height: 400px;
     margin-bottom: 2rem;
 }
 
@@ -141,6 +143,24 @@ nav a {
 p {
     margin-bottom: 14px;
     margin-left: 0.5rem;
+}
+
+.borrowed-card {
+    padding: 10px;
+    background-color: rgba(218, 211, 211, 0.81);
+    position: relative;
+    max-width: 200px;
+    height: 450px;
+    margin-bottom: 2rem;
+}
+
+.borrowed-card>img {
+    height: 250px;
+}
+
+.borrowed-card h2,
+p {
+    margin: 14px 0 0 0.5rem;
 }
 
 .badge {
@@ -175,6 +195,7 @@ p {
     background-color: rgb(78, 19, 39);
     color: white;
     border-radius: 12px;
+    border: none;
 }
 
 .book-details h2 {
@@ -187,7 +208,7 @@ p {
 
 .book-details p {
     margin-left: 0;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .genres-sec {
@@ -214,4 +235,13 @@ p {
     border-radius: 14px;
     border: 1.5px solid rgb(171, 127, 127);
     padding: 5px 16px;
+}
+
+.return-btn {
+    margin-top: 1rem;
+    background-color: rgb(78, 19, 39);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 9px 28px;
 }

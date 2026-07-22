@@ -1,7 +1,7 @@
 <%- include('../partials/nav') %>
 
 
-    <h1 style="margin-top: 4rem;">Books to Borrow</h1>
+    <h1 style="margin-top: 4rem; margin-bottom: 3rem;">Books to Borrow</h1>
 
     <% if (allToBorrows.length === 0) { %>
         <p>There are no books that are available to borrow.</p>
@@ -16,8 +16,10 @@
                             <% if (item.isBorrowed === true) { %>
                                 <span class="badge">Borrowed</span>
                             <% } %>
-                            <h2><%= item.title %></h2>
-                            <p><%= item.author %></p>
+                            <div class="book-main-info">
+                                <h2><%= item.title %></h2>
+                                <p><%= item.author %></p>
+                            </div>
                         </div>
                     </a>
                     <br>
