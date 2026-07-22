@@ -8,7 +8,7 @@
         
         <div>
             <% foundBorrow.genres.forEach((item) => { %>
-                <%= item %>
+                <button><%= item %></button>
             <% }) %>
         </div>
         <p><%= foundBorrow.description %></p>
@@ -18,7 +18,9 @@
 
         <!-- <p>X people have borrowed this book</p> -->
         <div>
-            <% if (userBorrow && userBorrow.status === 'pending') { %>
+            <% if (!user) { %>
+                <p><a href="/auth/sign-in">Sign in</a> to borrow this book.</p>
+            <% } else if (userBorrow && userBorrow.status === 'pending') { %>
                 <button disabled>Request Pending</button>
             <% } else if (userBorrow && userBorrow.status === 'borrowed') { %>
                 <form action="/to-borrow/<%= foundBorrow._id %>/return" method="POST">
@@ -31,11 +33,10 @@
                     <button type="submit">Borrow this Book</button>
                 </form>
             <% } %>
-
-            <!-- <form action="">
-                <button>❤️Wish to Borrow?</button>
-            </form> -->
         </div>
+        <!-- <form action="">
+            <button>❤️Wish to Borrow?</button>
+        </form> -->
 
 </body>
 </html>
