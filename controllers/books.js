@@ -132,6 +132,11 @@ const accept = async (req, res) => {
   res.redirect('/dashboard')
 }
 
+const addToBorrow = async (req, res) => {
+  await Book.findByIdAndUpdate(req.params.bookId, { isBorrowable: true })
+  res.redirect(`/books/${req.params.bookId}`)
+}
+
 module.exports = {
   index,
   showNewForm,
@@ -142,4 +147,5 @@ module.exports = {
   deleteBook,
   showMyBorrows,
   accept,
+  addToBorrow,
 }
