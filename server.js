@@ -69,6 +69,7 @@ app.get('/books/:bookId', bookCtrl.show)
 app.get('/books/:bookId/edit', bookCtrl.edit)
 app.put('/books/:bookId', isSignedIn, bookCtrl.update)
 app.delete('/books/:bookId', isSignedIn, bookCtrl.deleteBook)
+app.put('/books/:bookId/borrow-status', isSignedIn, bookCtrl.addToBorrow)
 
 // TO BORROW ROUTES
 app.get('/to-borrow', toBorrowCtrl.index)

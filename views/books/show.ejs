@@ -17,6 +17,7 @@
         <% foundBook.genres.forEach((item) => { %>
             <%=item %>
         <% }) %>
+
         <h3>Manage</h3>
         <div>
             <a href="/books/<%= foundBook._id %>/edit">Edit this Book</a>
@@ -25,9 +26,13 @@
                 <button type="submit">Delete this Book</button>
             </form>
 
-            <form action="" method="POST">
-                <button>Add To Borrow</button>
+            <% if (foundBook.isBorrowable === true) { %>
+                <button>Already Available to Borrow</button>
+            <% } else { %>
+            <form action="/books/<%= foundBook._id %>/borrow-status?_method=PUT" method="POST">
+                <button type="submit">Available to Borrow?</button>
             </form>
+            <% } %>
         </div>
 
         <h3>Borrowed By</h3>
@@ -35,7 +40,6 @@
           <%  foundBorrow.forEach((borrow)=>{%>
             <p><%=borrow.userId.username%></p>
          <% }) %>
-
         <% } %>
 
     <% } else { %>
