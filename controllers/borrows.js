@@ -15,21 +15,20 @@ const show = async (req, res) => {
   const user = req.session.user
 
   const userBorrow = user
-    ? await Borrow.findOne({
-      bookId: req.params.bookId,
-      userId: user._id,
-    })
+    ? await Borrow.findOne({ bookId: req.params.bookId, userId: user._id })
       .sort({ createdAt: -1 })
       .populate('userId')
     : null
 
-  if (user && foundBorrow.owner.equals(user._id)) {
-    return res.redirect('/books')
-  }
+  const activeBorrow = await Borrow.findOne({
+    bookId: req.params.bookId,
+    status: 'borrowed',
+  }).populate('userId')
 
   res.render('to-borrow/show.ejs', {
     foundBorrow,
     userBorrow,
+    activeBorrow,
   })
 }
 

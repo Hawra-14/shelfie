@@ -1,25 +1,35 @@
 <%- include('./partials/nav') %>
 
+    <h1 style="margin-top: 4rem;"><%= `${user.username.toUpperCase()}'s Borrow Requests`%></h1>
 
-    <h1 style="margin-top: 4rem;"><%= user.username %>'s Borrow Requests</h1>
-    <% borrowRequest.forEach((item) => { %>
+    <% if (borrowRequest.length === 0) { %>
+        <p>No borrow requests right now.</p>
+    <% } else { %>
+        <div class="request-list">
+            <% borrowRequest.forEach((item) => { %>
+                <div class="borrow-request">
+                    <div class="request-info">
+                        <p class="request-text">
+                            <%= `${item.userId.username.toUpperCase()} wants to borrow "${item.bookId.title}"` %>
+                        </p>
+                        <p class="request-date">
+                            <%= `${item.requestDate.toDateString()} at ${item.requestDate.getHours()}:${item.requestDate.getMinutes().toString().padStart(2, '0')}` %>
+                        </p>
+                    </div>
 
-        <div class="borrow-request">
+                    <div class="action-btn">
+                        <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>?_method=PUT" method="POST">
+                            <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Accept</button>
+                        </form>
 
-            <p><%= `${item.userId.username.toUpperCase()} wants to borrow "${item.bookId.title}"` %></p>
-            <p><%= `${item.requestDate.toDateString()} at ${item.requestDate.getHours()}: ${item.requestDate.getMinutes()}` %></p>
-            
-            <div class="action-btn">
-                <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>?_method=PUT" method="POST">
-                    <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %> >Accept</button> 
-                </form>
-                
-                <form action="/dashboard?_method=PUT" method="POST">
-                    <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %> >Reject</button>
-                </form>
-            </div>
+                        <form action="/dashboard?_method=PUT" method="POST">
+                            <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Reject</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
         </div>
-    <% }) %>
+    <% } %>
 
 </body>
 </html>

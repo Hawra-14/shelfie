@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIgn In</title>
-</head>
-<body>
-    <h1>Sign In</h1>
-    <form action="/auth/sign-in" method="POST">
-        Username:
-        <input type="text" name="username" />
-        Password:
-        <input type="password" name="password" />
-        <button type="submit">Sign In</button>
-    </form>
+<%- include('../partials/nav') %>
+
+    <div class="auth-card">
+        <h1>Sign In</h1>
+
+        <form action="/auth/sign-in" method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+
+            <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+    </div>
+
 </body>
 </html>
