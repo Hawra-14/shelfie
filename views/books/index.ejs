@@ -2,24 +2,24 @@
 
     <h1>My Books</h1>
 
-    <a href="/books/new">Add a Book</a>
+    <a href="/books/new" class="add-book">Add a Book</a>
 
     <% if (myBooks.length === 0) { %>
         <p>You don't have books.</p>
     <% } else { %>
-        <% myBooks.forEach((item) => { %>
-            <div class="book-cards">
-                <a href="/books/<%= item._id %>">
-                    <img src="<%= item.image %>" width="300">
-                    <p><%= item.title %></p>
-                    <p><%= item.author %></p>
-                    <% if (item.status === 'borrowed') { %>
-                        <p>Borrowed</p>
-                    <% } %>
+        <div class="book-cards">
+            <% myBooks.forEach((item) => { %>
+                <a href="/books/<%= item._id %>" style="text-decoration: none; color: black;">
+                    <div class="book-card">
+                        <img src="<%= item.image %>" width="200"> 
+                        <span class="badge"><%= item.status %></span>
+                        <h2><%= item.title %></h2>
+                        <p>Book By <%= item.author %></p>
+                        <p></p>
+                    </div>
                 </a>
-            </div>
-            <br>
-        <% }) %>
+            <% }) %>
+        </div>
     <% } %>
 
 </body>

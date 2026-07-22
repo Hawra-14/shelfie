@@ -9,6 +9,61 @@ form {
     align-items: center;
 }
 
-button {
+/* button {
     margin-top: 10px;
+} */
+
+.borrow-request {
+    padding: 20px;
+    background-color: rgb(232, 179, 197);
+    border-radius: 16px;
+    width: 60%;
+    justify-items: center;
+}
+
+.action-btn {
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.add-book {
+    padding: 10px;
+    background-color: palevioletred;
+    border-radius: 16px;
+    display: flex;
+    justify-self: right;
+    margin-right: 5%;
+    text-decoration: none;
+}
+
+.book-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.book-card {
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.book-card>img {
+    height: 250px;
+}
+
+.book-card h2, p {
+    margin-bottom: 14px;
+    margin-left: 0.5rem;
+}
+
+.badge {
+    background-color: #b65050;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
 }
