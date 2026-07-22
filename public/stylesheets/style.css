@@ -70,3 +70,42 @@ p {
     top: 16px;
     right: 16px;
 }
+
+.book-details-section {
+    display: flex;
+    gap: 3.5rem;
+    margin: 3rem;
+}
+
+.book-details-section>img {
+    height: 450px;
+}
+
+.book-details p:first-of-type {
+    margin-top: 35px;
+}
+
+.book-details p {
+    margin-left: 0;
+}
+
+.genres-sec {
+    display: flex;
+    gap: 10px;
+}
+
+.owner-manage {
+    display: flex;
+    gap: 5%
+}
+
+.owner-manage button {
+    width: 200px;
+}
+
+.genres {
+    background-color: rgb(224, 182, 182);
+    border-radius: 14px;
+    border: 1.5px solid rgb(171, 127, 127);
+    padding: 5px 16px;
+}

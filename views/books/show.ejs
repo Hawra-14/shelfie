@@ -2,39 +2,45 @@
 
 
     <% if (foundBook.owner._id.equals(user._id)) { %>
-        <h1><%= foundBook.title %></h1>
-        <h2><%= foundBook.author %></h2>
-        <img src="<%= foundBook.image %>" width="300">
-        <p><%= foundBook.description %></p>
-        <p><%= foundBook.status %></p>
+        <section class="book-details-section">
+            <img src="<%= foundBook.image %>" width="300">
 
-        <h3>Rating & Review</h3>
-        <p>⭐<%= foundBook.rate %></p>
-        <p><%= foundBook.review %></p>
+            <div class="book-details">
+                <h1><%= foundBook.title %></h1>
+                <h2>Book By <%= foundBook.author %></h2>
 
+                <% foundBook.genres.forEach((item) => { %>
+                    <button class="genres"><%=item %></button>
+                <% }) %>
 
-        <h3>Genres</h3>
-        <% foundBook.genres.forEach((item) => { %>
-            <%=item %>
-        <% }) %>
+                <p><%= foundBook.description %></p>
 
-        <h3>Manage</h3>
-        <div>
-            <a href="/books/<%= foundBook._id %>/edit">Edit this Book</a>
+                <p><%= foundBook.status %></p>
+                
+                <hr>
 
-            <form action="/books/<%= foundBook._id %>?_method=DELETE" method="POST">
-                <button type="submit">Delete this Book</button>
-            </form>
+                <h2>Rating & Review</h2>
+                <p>⭐<%= foundBook.rate %></p>
+                <p><%= foundBook.review %></p>
 
-            <% if (foundBook.isBorrowable === true) { %>
-                <button>Already Available to Borrow</button>
-            <% } else { %>
-            <form action="/books/<%= foundBook._id %>/borrow-status?_method=PUT" method="POST">
-                <button type="submit">Available to Borrow?</button>
-            </form>
-            <% } %>
-        </div>
+                <h2>Manage</h2>
+                <div class="owner-manage">
+                    <button><a href="/books/<%= foundBook._id %>/edit" style="text-decoration: none; color: black;">Edit this Book</a></button>
 
+                    <form action="/books/<%= foundBook._id %>?_method=DELETE" method="POST">
+                        <button type="submit">Delete this Book</button>
+                    </form>
+
+                    <% if (foundBook.isBorrowable === true) { %>
+                        <button>Already Available to Borrow</button>
+                    <% } else { %>
+                    <form action="/books/<%= foundBook._id %>/borrow-status?_method=PUT" method="POST">
+                        <button type="submit">Available to Borrow?</button>
+                    </form>
+                    <% } %>
+                </div>
+            </div>
+        </section>
     <% } else { %>
         <p>You don't have books.</p>
     <% } %>
