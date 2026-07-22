@@ -3,26 +3,28 @@
 
     <% if (foundBook.owner._id.equals(user._id)) { %>
         <section class="book-details-section">
-            <img src="<%= foundBook.image %>" width="300">
+            <div class="book-img-status">
+                <img src="<%= foundBook.image %>" width="300">
+                <button class="book-status"><%= foundBook.ownershipStatus %></button>
+                <button class="book-status"><%= foundBook.status %></button>
+            </div>
 
             <div class="book-details">
                 <h1><%= foundBook.title %></h1>
-                <h2>Book By <%= foundBook.author %></h2>
+                <h1 style="color: rgb(69, 63, 63); font-size: 24px;">Book By <%= foundBook.author %></h1>
 
                 <% foundBook.genres.forEach((item) => { %>
                     <button class="genres"><%=item %></button>
                 <% }) %>
 
-                <p><%= foundBook.description %></p>
-
-                <p><%= foundBook.status %></p>
-                
+                <p><%= foundBook.description %></p>                
                 <hr>
 
                 <h2>Rating & Review</h2>
                 <p>⭐<%= foundBook.rate %></p>
                 <p><%= foundBook.review %></p>
-
+                <hr>
+                
                 <h2>Manage</h2>
                 <div class="owner-manage">
                     <button><a href="/books/<%= foundBook._id %>/edit" style="text-decoration: none; color: black;">Edit this Book</a></button>

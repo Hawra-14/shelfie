@@ -1,21 +1,23 @@
 <%- include('../partials/nav') %>
 
-    <h1>My Books</h1>
+    <h1 style="margin-top: 4rem;">My Books</h1>
 
     <a href="/books/new" class="add-book">Add a Book</a>
 
     <% if (myBooks.length === 0) { %>
         <p>You don't have books.</p>
     <% } else { %>
+
         <div class="book-cards">
             <% myBooks.forEach((item) => { %>
                 <a href="/books/<%= item._id %>" style="text-decoration: none; color: black;">
                     <div class="book-card">
                         <img src="<%= item.image %>" width="200"> 
                         <span class="badge"><%= item.status %></span>
-                        <h2><%= item.title %></h2>
-                        <p>Book By <%= item.author %></p>
-                        <p></p>
+                        <div class="book-main-info">
+                            <h2><%= item.title %></h2>
+                            <p>Book By <%= item.author %></p>
+                        </div>
                     </div>
                 </a>
             <% }) %>
