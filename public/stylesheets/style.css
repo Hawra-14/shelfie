@@ -28,12 +28,14 @@ form {
 }
 
 .add-book {
-    padding: 10px;
-    background-color: palevioletred;
+    padding: 10px 23px;
+    background-color: rgb(78, 19, 39);
+    color: white;
     border-radius: 16px;
     display: flex;
     justify-self: right;
     margin-right: 5%;
+    margin-bottom: 2rem;
     text-decoration: none;
 }
 
@@ -52,7 +54,8 @@ form {
     height: 250px;
 }
 
-.book-card h2, p {
+.book-card h2,
+p {
     margin-bottom: 14px;
     margin-left: 0.5rem;
 }

@@ -7,22 +7,23 @@
         <p>There are no books that are available to borrow.</p>
 
     <% } else { %>
-        <% allToBorrows.forEach((item) => { %>
-            <% if (!item.owner.equals(user._id)) { %>
-                <div class="book-cards">
-                    <a href="/to-borrow/<%= item._id %>">
-                        <img src="<%= item.image %>" width="300">
-                        <h4><%= item.title %></h4>
-                        <p><%= item.author %></p>
-
-                        <% if (item.isBorrowed === true) { %>
-                            <p>Borrowed</p>
-                        <% } %>
+        <div class="book-cards">
+            <% allToBorrows.forEach((item) => { %>
+                <% if (!item.owner.equals(user._id)) { %>
+                    <a href="/to-borrow/<%= item._id %>" style="text-decoration: none; color: black;">
+                        <div class="book-card">
+                            <img src="<%= item.image %>" width="200">
+                            <% if (item.isBorrowed === true) { %>
+                                <span class="badge">Borrowed</span>
+                            <% } %>
+                            <h2><%= item.title %></h2>
+                            <p><%= item.author %></p>
+                        </div>
                     </a>
-                </div>
-                <br>
-            <% } %>
-        <% }) %>
+                    <br>
+                <% } %>
+            <% }) %>
+        </div>
     <% } %>
 
 
