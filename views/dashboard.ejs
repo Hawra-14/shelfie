@@ -3,15 +3,22 @@
 
     <h1><%= user.username %>'s Pending Requests</h1>
     <% borrowRequest.forEach((item) => { %>
-        <p><%= item.userId.username  %> <%= `${item.requestDate.toDateString()} at ${item.requestDate.getHours()}: ${item.requestDate.getMinutes()}`  %> 
+
+        <div class="borrow-request">
+
+            <p><%= `${item.userId.username.toUpperCase()} wants to borrow "${item.bookId.title}"` %></p>
+            <p><%= `${item.requestDate.toDateString()} at ${item.requestDate.getHours()}: ${item.requestDate.getMinutes()}` %></p>
             
-            <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>?_method=PUT" method="POST">
-                <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %> >Accept</button> 
-            </form>
-            <form action="/dashboard?_method=PUT" method="POST">
-                <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %> >Reject</button>
-            </form>
-        </p>
+            <div class="action-btn">
+                <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>?_method=PUT" method="POST">
+                    <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %> >Accept</button> 
+                </form>
+                
+                <form action="/dashboard?_method=PUT" method="POST">
+                    <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %> >Reject</button>
+                </form>
+            </div>
+        </div>
     <% }) %>
 
 </body>
