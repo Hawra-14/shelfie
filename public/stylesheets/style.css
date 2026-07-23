@@ -230,6 +230,10 @@ p {
     padding: 9px 28px;
 }
 
+form {
+    align-self: center;
+}
+
 .book-form {
     width: 500px;
     margin-bottom: 3rem;
