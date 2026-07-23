@@ -41,6 +41,16 @@
                     </form>
                     <% } %>
                 </div>
+
+                <hr>
+                <h2>Borrow Status</h2>
+                <% const activeBorrow = foundBorrow.find(b => b.status === 'borrowed'); %>
+                <% if (activeBorrow) { %>
+                    <p>Currently borrowed by <strong><%= activeBorrow.userId.username %></strong>
+                        since <%= activeBorrow.borrowDate.toDateString() %></p>
+                <% } else { %>
+                    <p>Not currently borrowed.</p>
+                <% } %>
             </div>
         </section>
     <% } else { %>

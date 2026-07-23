@@ -108,9 +108,14 @@ const accept = async (req, res) => {
   const foundBorrow = await Borrow.findById(req.params.borrowId)
   const foundBook = await Book.findById(req.params.bookId)
 
+  if (foundBook.isBorrowed) {
+    return res.send("This book is already borrowed.")
+  }
+
   foundBorrow.status = 'borrowed'
+  foundBorrow.borrowDate = new Date()
   foundBook.isBorrowed = true
-  
+
   await foundBorrow.save()
   await foundBook.save()
 

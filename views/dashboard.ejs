@@ -10,7 +10,8 @@
                 <div class="borrow-request">
                     <div class="request-info">
                         <p class="request-text">
-                            <%= `${item.userId.username.toUpperCase()} wants to borrow "${item.bookId.title}"` %>
+                            <strong><%= item.userId.username %></strong> 
+                            wants to borrow "<%= item.bookId.title %>"
                         </p>
                         <p class="request-date">
                             <%= `${item.requestDate.toDateString()} at ${item.requestDate.getHours()}:${item.requestDate.getMinutes().toString().padStart(2, '0')}` %>
@@ -19,11 +20,11 @@
 
                     <div class="action-btn">
                         <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>?_method=PUT" method="POST">
-                            <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Accept</button>
+                            <button type="submit" class="<%= item.bookId.isBorrowed ? 'btn-disabled' : '' %>" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Accept</button>
                         </form>
 
                         <form action="/dashboard/<%= item.bookId._id %>/<%= item._id %>/reject?_method=PUT" method="POST">
-                            <button type="submit" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Reject</button>
+                            <button type="submit" class="<%= item.bookId.isBorrowed ? 'btn-disabled' : '' %>" <%= item.bookId.isBorrowed ? 'disabled' : '' %>>Reject</button>
                         </form>
                     </div>
                 </div>
